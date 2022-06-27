@@ -1,23 +1,9 @@
-<script>
-import { reactive, readonly, watchEffect } from 'vue';
-const original = reactive({ count: 0 })
-
-const copy = readonly(original)
-
-watchEffect(() => {
-  // works for reactivity tracking
-  console.log(copy.count, 'copy.count')
-})
-
-// mutating original will trigger watchers relying on the copy
-// original.count++
-
-// mutating the copy will fail and result in a warning
-// copy.count++ // warning!
+<script setup>
+import HelloWorld from './components/HelloWorld.vue';
 </script>
 
 <template>
-  hello world
+  <HelloWorld />
 </template>
 
 <style>
