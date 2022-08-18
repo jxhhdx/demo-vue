@@ -1,5 +1,5 @@
-import { createApp } from 'vue'
+import { createSSRApp } from 'vue'
 import App from './App.vue'
 
-const app = createApp(App)
+const app = createSSRApp(App)
 app.mount('#app')
