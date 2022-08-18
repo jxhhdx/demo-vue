@@ -17,8 +17,13 @@ export default {
 <template>
   <div>
     {{ original.count }}
+    <br>
     {{ msg }}
-    <button @click="click" >click</button>  
+    <br>
+    {{ getValueByMixin }}
+    <br>
+    <button v-bbq:asdasd.996="'买买提'" @click="click" >click</button> 
+    <MyComponent />
   </div>
 </template>
 
