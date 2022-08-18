@@ -1,9 +1,15 @@
-<script setup>
+<script >
 import { reactive } from 'vue'
-const original = reactive({ count: 0 })
+export default {
+  inject: ['msg'],
+  setup() {
+    const original = reactive({ count: 0 })
 
-const click = () => {
-  original.count ++
+    const click = () => {
+      original.count ++
+    }
+    return { original, click }
+  }
 }
 
 </script>
@@ -11,6 +17,7 @@ const click = () => {
 <template>
   <div>
     {{ original.count }}
+    {{ msg }}
     <button @click="click" >click</button>  
   </div>
 </template>
