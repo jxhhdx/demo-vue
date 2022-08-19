@@ -1,4 +1,4 @@
-import { createApp, h } from 'vue'
+import { createApp, h, ref } from 'vue'
 import App from './App.vue'
 
 const app = createApp(App)
@@ -7,7 +7,6 @@ app.use({
     install(bpp) {
         bpp.provide('msg', 'hello world')
         bpp.component('MyComponent', {
-            template: `<div>两只🐯在💃</div>`,
             render() {
                 return h('div', { class: 'bbq' }, '两只🐯在💃，小🐰乖乖拔萝卜')
             }
@@ -24,6 +23,44 @@ app.use({
                 }
             }
         })
+    }
+})
+app.use({
+    install(bbq) {
+        bbq.config.errorHandler = (err, instance, info) => {
+            // err: 抛出错误; instance: 出现错误的实例; info: 错误信息;
+            console.log('this is errorHandler', err, instance, info);
+        }
+        bbq.config.warnHandler = (msg, instance, trace) => {
+            // `trace` is the component hierarchy trace
+            console.log('this is warnHandler',msg, instance, trace);
+        }
+        // 开启特殊的性能优化标记
+        bbq.config.performance = true
+
+        // 配合 vite.config.js 配置 compilerOptions, 可以使 bbq-a 失效
+        bbq.component('bbq-a', {
+            render() {
+                return h('div', { class: 'bbq' }, '两只🐯在💃，小🐰乖乖拔萝卜; is-custom-bbq')
+            }
+        })
+        bbq.config.globalProperties.gpVal = "this value by globalProperties"
+        
+        bbq.config.optionMergeStrategies.computed = (parent, child) => {
+            return {
+                msgBbq() {
+                    return parent.msgBbq() + child.msgBbq()
+                }
+            }
+        }
+        bbq.mixin({
+            computed: {
+                msgBbq() {
+                    return 'this value bug minxin'
+                }
+            },
+        })
+
     }
 })
 app.mount('#app')
