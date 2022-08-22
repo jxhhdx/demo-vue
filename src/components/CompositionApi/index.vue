@@ -16,7 +16,22 @@ import {
   isProxy,
   isReactive,
   isReadonly,
+
+  onMounted,
+  onUpdated,
+  onUnmounted,
+  onBeforeMount,
+  onBeforeUpdate,
+  onBeforeUnmount,
+  onErrorCaptured,
+  onRenderTracked,
+  onRenderTriggered,
+  onActivated,
+  onDeactivated,
+  onServerPrefetch,
 } from 'vue';
+import ApiChildren from './ApiChildren.vue';
+import ApiAdvanced from './ApiAdvanced.vue';
 
 export default {
   props: {
@@ -161,6 +176,21 @@ export default {
         isReadonly(attr4),
       );
     })();
+    onMounted(() => { console.log('onMounted') });
+    onUpdated(() => { console.log('onUpdated') });
+    onUnmounted(() => { console.log('onUnmounted') });
+    onBeforeMount(() => { console.log('onBeforeMount') });
+    onBeforeUpdate(() => { console.log('onBeforeUpdate') });
+    onBeforeUnmount(() => { console.log('onBeforeUnmount') });
+    onErrorCaptured((...param) => { console.log('onErrorCaptured', param); return false; });
+    onRenderTracked(() => {});
+    onRenderTriggered(() => {});
+    // KeepAline 缓存树被加入dom时调用
+    onActivated(() => {});
+    // KeepAline 缓存树被移除时调用
+    onDeactivated(() => {});
+    // 在服务器渲染之前调用
+    onServerPrefetch(() => {});
 
     return () => h(
       'div', 
@@ -179,7 +209,11 @@ export default {
         h('button', { onClick: () => { attr1.value.a1 += 'attr1'; } }, 'click-ref'),
         h('button', { onClick: () => { attr4.value.a1 += 'attr1'; } }, 'click-readonly'),
         h('br'),
-        ['只读代理，修改原代理会影响此内容: ', attr4.value.a1]
+        ['只读代理，修改原代理会影响此内容: ', attr4.value.a1],
+        h('br'),
+        h(ApiChildren, 'hello'),
+        h('br'),
+        h(ApiAdvanced, 'hello')
       ]
     )
   }

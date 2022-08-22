@@ -1,7 +1,7 @@
 <script lang="ts" >
 import AppInstanceApi from './components/AppInstanceApi.vue';
 import GeneralApi from './components/GeneralApi.vue';
-import CompositionApi from './components/CompositionApi.vue';
+import CompositionApi from './components/CompositionApi/index.vue';
 
 export default {
   components: {
