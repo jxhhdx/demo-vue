@@ -1,6 +1,22 @@
 
 <script lang="ts">
-import { ref, h, reactive, computed, readonly, watchEffect, watch } from 'vue';
+import { 
+  ref,
+  h,
+  reactive,
+  computed,
+  readonly,
+  watchEffect,
+  watch,
+
+  isRef,
+  unref,
+  toRef,
+  toRefs,
+  isProxy,
+  isReactive,
+  isReadonly,
+} from 'vue';
 
 export default {
   props: {
@@ -55,6 +71,96 @@ export default {
       const bbq996 = document.querySelector('#bbq996') as HTMLElement;
       console.log('watchEffect-post', bbq996);
     }, { flush: 'post' });
+
+    // 三、tool
+    (() => {
+      // isRef()
+      console.log(
+        'isRef:', 
+        `
+          ref: ${isRef(attr1)};
+          reactive: ${isRef(attr2)};
+          computed: ${isRef(attr3)};
+          readonly: ${isRef(attr4)};
+        `,
+      );
+      // unref()
+      console.log(
+        'unref:', 
+        'ref',
+        unref(attr1),
+        attr1,
+        'reactive',
+        unref(attr2),
+        attr2,
+        'computed',
+        unref(attr3),
+        attr3,
+        'readonly',
+        unref(attr4),
+        attr4,
+      );
+      // toRef()
+      console.log(
+        'toRef:', 
+        'ref',
+        toRef(attr1.value, 'a1'),
+        'reactive',
+        toRef(attr2, 'a2'),
+        'computed',
+        toRef(attr3.value, 'a3'),
+        'readonly',
+        toRef(attr4.value, 'a1'),
+      );
+      // toRefs()
+      console.log(
+        'toRefs:', 
+        'ref',
+        toRefs(attr1.value),
+        'reactive',
+        toRefs(attr2),
+        'computed',
+        toRefs(attr3.value),
+        'readonly',
+        toRefs(attr4.value),
+      );
+      // isProxy()
+      console.log(
+        'isProxy:', 
+        'ref',
+        isProxy(attr1.value),
+        'reactive',
+        isProxy(attr2),
+        'computed',
+        isProxy(attr3),
+        'readonly',
+        isProxy(attr4),
+      );
+      // isReactive()
+      console.log(
+        'isReactive:', 
+        'ref',
+        isReactive(attr1),
+        'reactive',
+        isReactive(attr2),
+        'computed',
+        isReactive(attr3),
+        'readonly',
+        isReactive(attr4),
+      );
+      // isReadonly()
+      console.log(
+        'isReadonly:', 
+        'ref',
+        isReadonly(attr1),
+        'reactive',
+        isReadonly(attr2),
+        'computed',
+        isReadonly(attr3),
+        'readonly',
+        isReadonly(attr4),
+      );
+    })();
 
     return () => h(
       'div', 
