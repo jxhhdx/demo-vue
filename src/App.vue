@@ -2,12 +2,14 @@
 import AppInstanceApi from './components/AppInstanceApi.vue';
 import GeneralApi from './components/GeneralApi.vue';
 import CompositionApi from './components/CompositionApi/index.vue';
+import OptionApi from './components/OptionApi/index.vue';
 
 export default {
   components: {
     AppInstanceApi,
     GeneralApi,
     CompositionApi,
+    OptionApi,
   },
 }
 
@@ -17,7 +19,7 @@ export default {
   <div>
     <!-- <app-instance-api /> -->
     <!-- <general-api /> -->
-    <composition-api>
+    <!-- <composition-api>
       <div>hello</div>
       <template v-slot:bbq="item">
         {{ item ? 'bbq-slot-true' : 'bbq-slot-false' }}
@@ -25,7 +27,8 @@ export default {
       <template #bbc="item">
         {{ item ? 'bbc-slot-true' : 'bbc-slot-false' }}
       </template>
-    </composition-api>
+    </composition-api> -->
+    <option-api id="穿透" />
   </div>
 </template>
 
