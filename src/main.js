@@ -1,7 +1,8 @@
-import { createApp, h, ref } from 'vue'
+import { createSSRApp, h, ref } from 'vue'
 import App from './App.vue'
+import { renderToString } from 'vue/server-renderer'
 
-const app = createApp(App)
+const app = createSSRApp(App)
 
 app.use({
     install(bpp) {
@@ -27,14 +28,16 @@ app.use({
 })
 app.use({
     install(bbq) {
-        // bbq.config.errorHandler = (err, instance, info) => {
-        //     // err: 抛出错误; instance: 出现错误的实例; info: 错误信息;
-        //     console.log('this is errorHandler', err, instance, info);
-        // }
-        // bbq.config.warnHandler = (msg, instance, trace) => {
-        //     // `trace` is the component hierarchy trace
-        //     console.log('this is warnHandler',msg, instance, trace);
-        // }
+        bbq.config.errorHandler = (err, instance, info) => {
+            // err: 抛出错误; instance: 出现错误的实例; info: 错误信息;
+            console.log('this is errorHandler', err, instance, info);
+        }
+        
+        bbq.config.warnHandler = (msg, instance, trace) => {
+            // `trace` is the component hierarchy trace
+            console.log('this is warnHandler',msg, instance, trace);
+        }
+
         // 开启特殊的性能优化标记
         bbq.config.performance = true
 
@@ -44,8 +47,9 @@ app.use({
                 return h('div', { class: 'bbq' }, '两只🐯在💃，小🐰乖乖拔萝卜; is-custom-bbq')
             }
         })
+
         bbq.config.globalProperties.gpVal = "this value by globalProperties"
-        
+
         bbq.config.optionMergeStrategies.computed = (parent, child) => {
             return {
                 msgBbq() {
@@ -53,6 +57,7 @@ app.use({
                 }
             }
         }
+
         bbq.mixin({
             computed: {
                 msgBbq() {
@@ -63,5 +68,8 @@ app.use({
 
     }
 })
-app.mount('#app')
-
+app.mount('#app');
+(async () => {
+    const html = await renderToString(app)
+    console.log(html)
+})()
