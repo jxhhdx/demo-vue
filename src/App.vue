@@ -4,7 +4,8 @@ import GeneralApi from './components/GeneralApi.vue';
 import CompositionApi from './components/CompositionApi/index.vue';
 import OptionApi from './components/OptionApi/index.vue';
 import BuiltIns from './components/BuiltIns/index.vue';
-import SingleFileComponent from './components/SingleFileComponent/index.vue'
+import SingleFileComponent from './components/SingleFileComponent/index.vue';
+import AdvancedApi from './components/AdvancedApi/index.vue';
 
 export default {
   components: {
@@ -14,6 +15,7 @@ export default {
     OptionApi,
     BuiltIns,
     SingleFileComponent,
+    AdvancedApi,
 },
 }
 
@@ -34,7 +36,8 @@ export default {
     </composition-api> -->
     <!-- <option-api id="穿透" /> -->
     <!-- <built-ins /> -->
-    <single-file-component />
+    <!-- <single-file-component /> -->
+    <advanced-api />
   </div>
 </template>
 
