@@ -3,6 +3,7 @@ import AppInstanceApi from './components/AppInstanceApi.vue';
 import GeneralApi from './components/GeneralApi.vue';
 import CompositionApi from './components/CompositionApi/index.vue';
 import OptionApi from './components/OptionApi/index.vue';
+import BuiltIns from './components/BuiltIns/index.vue';
 
 export default {
   components: {
@@ -10,6 +11,7 @@ export default {
     GeneralApi,
     CompositionApi,
     OptionApi,
+    BuiltIns
   },
 }
 
@@ -28,7 +30,8 @@ export default {
         {{ item ? 'bbc-slot-true' : 'bbc-slot-false' }}
       </template>
     </composition-api> -->
-    <option-api id="穿透" />
+    <!-- <option-api id="穿透" /> -->
+    <built-ins />
   </div>
 </template>
 
